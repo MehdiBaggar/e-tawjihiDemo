@@ -1,0 +1,17 @@
+{% extends 'template.html.twig' %}
+
+{% block body %}
+    <div class="alert alert-success">
+        {{ personne.firstName }} {{ personne.name }} a {{ personne.age }} ans
+    </div>
+    <div>
+        <img src=" {{ asset('uploads/personnes/' ~ personne.image) }}" alt="Photo de {{ personne.name }}" width="150">
+    </div>
+{% endblock %}
+{% block titrePage %}
+    <h1>{{ personne.firstName }} {{ personne.name }} :</h1>
+{% endblock %}
+{% block title %}
+ {{ personne.firstName }} {{ personne.name }}
+{% endblock %}
+

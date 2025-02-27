@@ -1,0 +1,11 @@
+/* Error: Undefined mixin.
+ *     ,
+ * 494 | @include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+ *     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *     '
+ *   node_modules/bootstrap/scss/_variables.scss 494:1  @use
+ *   assets/css/scss/config/interactive/app.scss 14:1   root stylesheet */
+
+body{
+  background: whitesmoke;
+}

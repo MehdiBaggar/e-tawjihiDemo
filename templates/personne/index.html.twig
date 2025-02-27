@@ -1,0 +1,66 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Liste des Personnes{% endblock %}
+
+{% block titrePage %}
+    <h1>
+        Listes Des Personnes :
+    </h1>
+    <br>
+{% endblock %}
+{% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('personne.edit', {'id': '0'}) }}"><button type="button" class="btn btn-outline-secondary">Ajouter Personne</button></a>
+    {% endif %}
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">FirstName</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Age</th>
+            <th scope="col">Details</th>
+            {% if is_granted('ROLE_ADMIN') %}
+            <th scope="col">Delete</th>
+            <th scope="col">Editer</th>
+            {% endif %}
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for personne in personnes %}
+        <tr>
+            <th scope="row">{{ personne.id }}</th>
+            <td>{{ personne.firstName }}</td>
+            <td>{{ personne.name}}</td>
+            <td>{{ personne.age }}</td>
+            <td><a href="{{ path('personne.detail',{id : personne.id}) }}"><i class="fa-solid fa-info"></i></a></td>
+            {% if is_granted('ROLE_ADMIN') %}
+            <td><a href="{{ path('personne.delete',{id : personne.id}) }}"><i class="fa-solid fa-delete-left"></i></a></td>
+            <td><a href="{{ path('personne.edit',{id : personne.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        {% if isPaginated is defined and isPaginated %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if page != 1 %}
+                    <li class="page-item"><a class="page-link" href="{{ path('personne.Alls',{page:page-1,nbrE:nbrE}) }}" style="color:black;">Previous</a></li>
+                {% endif %}
+                {% for i in range(1,nbrPages) %}
+                <li class="page-item"><a class="page-link" href="{{ path('personne.Alls',{page:i,nbrE:nbrE}) }}" style="color:black;">{{ i }}</a></li>
+                {% endfor %}
+                {% if page != nbrPages %}
+                <li class="page-item"><a class="page-link" href="{{ path('personne.Alls',{page:page+1,nbrE:nbrE}) }}" style="color:black;">Next</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+
+
+{% endblock %}
